@@ -1,9 +1,10 @@
 package Tests;
 import Nodes.NodeSplay;
 
-public class SplayTest {
-    public static class SplayTreeChecker {
-
+public class SplayTest
+{
+    public static class SplayTreeChecker
+    {
         public boolean isSplayTree(NodeSplay root)
         {
             return !isSplayTreeUtil(root, Integer.MIN_VALUE, Integer.MAX_VALUE);

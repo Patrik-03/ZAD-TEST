@@ -4,7 +4,6 @@ import Nodes.NodeSplay;
 public class SplayTree
 {
     public NodeSplay root;
-
     NodeSplay rotateR(NodeSplay x)
     {
         NodeSplay z = x.left;

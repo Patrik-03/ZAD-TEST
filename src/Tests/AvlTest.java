@@ -1,8 +1,10 @@
 package Tests;
 import Nodes.NodeAvl;
 import Trees.AvlTree;
-public class AvlTest {
-    public static class AvlTreeChecker {
+public class AvlTest
+{
+    public static class AvlTreeChecker
+    {
         public AvlTree bal = new AvlTree();
 
         public boolean isBalanced(NodeAvl node) {

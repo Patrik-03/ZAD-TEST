@@ -54,8 +54,8 @@ public class AvlTree
         {
             return 0; //return 0
         }
-        return height(N.left) - height(N.right); //return height of left child - height of right child (balance factor)
 
+        return height(N.left) - height(N.right); //return height of left child - height of right child (balance factor)
     }
     public NodeAvl insert(NodeAvl node, int data) //insert node into tree
     {
