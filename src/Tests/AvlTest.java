@@ -1,5 +1,5 @@
 package Tests;
-import Nodes.NodeAvl;
+import Base.NodeAvl;
 import Trees.AvlTree;
 public class AvlTest
 {

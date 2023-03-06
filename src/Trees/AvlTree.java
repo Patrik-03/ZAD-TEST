@@ -1,5 +1,5 @@
 package Trees;
-import Nodes.NodeAvl;
+import Base.NodeAvl;
 public class AvlTree
 {
     public NodeAvl root; //root of tree (public for testing purposes)
@@ -176,5 +176,14 @@ public class AvlTree
             }
         }
         return node;
+    }
+    public void preorder(NodeAvl node) //preorder traversal
+    {
+        if (node != null) //if node is not null
+        {
+            System.out.print(node.data + ", "); //print node data
+            preorder(node.left); //recursive call
+            preorder(node.right); //recursive call
+        }
     }
 }

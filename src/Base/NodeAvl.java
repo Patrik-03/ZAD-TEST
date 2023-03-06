@@ -1,4 +1,4 @@
-package Nodes;
+package Base;
 public class NodeAvl
 {
     public int data;

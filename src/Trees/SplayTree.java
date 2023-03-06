@@ -1,5 +1,5 @@
 package Trees;
-import Nodes.NodeSplay;
+import Base.NodeSplay;
 
 public class SplayTree
 {
@@ -140,5 +140,14 @@ public class SplayTree
             node.right = search(node.right, data);
         }
         return splay(node, data);
+    }
+    public void preorder(NodeSplay node)
+    {
+        if(node != null)
+        {
+            System.out.print(node.data + ", ");
+            preorder(node.left);
+            preorder(node.right);
+        }
     }
 }
