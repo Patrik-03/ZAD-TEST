@@ -1,4 +1,5 @@
 package Base;
+
 public class HashTable
 {
     public int size;
