@@ -70,7 +70,7 @@ public class HashTableChaining
         }
 
     }
-    public void get(String key)
+    public boolean get(String key)
     {
         int index = (hash(key) % sizeT);
         if(table[index] != null)
@@ -80,10 +80,8 @@ public class HashTableChaining
             {
                 temp = temp.next;
             }
-            if(temp.key.equals(key))
-            {
-                return;
-            }
+            return temp.key.equals(key);
         }
+        return false;
     }
 }

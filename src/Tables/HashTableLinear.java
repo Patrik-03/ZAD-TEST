@@ -2,7 +2,12 @@ package Tables;
 import Base.HashLinear;
 public class HashTableLinear
 {
-    public HashLinear table = new HashLinear(10_000_000);
+    public HashLinear table;
+
+    public HashTableLinear(int capacity)
+    {
+        table = new HashLinear(capacity);
+    }
 
     public int hash(String key)
     {
@@ -34,17 +39,18 @@ public class HashTableLinear
         }
     }
 
-    public void get(String key)
+    public boolean get(String key)
     {
         int index = hash(key);
         while (table.keys[index] != null)
         {
             if (table.keys[index].equals(key))
             {
-                return;
+                return true;
             }
             index = (index + 1) % table.capacity;
         }
+        return false;
     }
 
     public void remove(String key)
@@ -60,6 +66,10 @@ public class HashTableLinear
                 return;
             }
             index = (index + 1) % table.capacity;
+        }
+        if (table.size <= table.capacity * 0.25)
+        {
+            resize(table.capacity / 2);
         }
     }
     private void resize(int newCapacity)

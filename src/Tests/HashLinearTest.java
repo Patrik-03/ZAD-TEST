@@ -4,7 +4,11 @@ public class HashLinearTest
 {
     public static class HashTableLinearChecker
     {
-        public HashTableLinear hash = new HashTableLinear();
+        public HashTableLinear hash;
+        public HashTableLinearChecker(int capacity)
+        {
+            hash = new HashTableLinear(capacity);
+        }
         public boolean isCollision()
         {
             for (int i = 0; i < hash.table.capacity; i++)

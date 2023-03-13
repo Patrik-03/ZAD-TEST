@@ -4,7 +4,7 @@ public class HashTableLinearPrint
 {
     public static void print()
     {
-        HashTableLinear hash = new HashTableLinear();
+        HashTableLinear hash = new HashTableLinear(10);
 
         hash.put("Matej", 11);
         hash.put("Kiko", 12);
