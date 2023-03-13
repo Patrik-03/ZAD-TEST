@@ -6,10 +6,10 @@ public class HashLinear
     public int[] values;
     public String[] keys;
 
-    public HashLinear(int capacity)
+    public HashLinear(int capacity) // constructor for HashLinear class
     {
-        this.capacity = capacity;
-        this.values = new int[capacity];
-        this.keys = new String[capacity];
+        this.capacity = capacity; // set capacity
+        this.values = new int[capacity]; // initialize values array to capacity size
+        this.keys = new String[capacity]; // initialize keys array to capacity size
     }
 }

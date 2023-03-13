@@ -24,7 +24,7 @@ public class AvlTree
     }
     int max(int a, int b) //get max of two integers
     {
-        return Math.max(a, b);
+        return Math.max(a, b); //return max of a and b
     }
     NodeAvl rotateR(NodeAvl node) //right rotation
     {
@@ -141,25 +141,27 @@ public class AvlTree
         node.height = 1 + Math.max(height(node.left), height(node.right)); //update height of node
         int balance = BF(node);
         // Left Left Case
-        if (balance > 1 && BF(node.left) >= 0)
-            return rotateR(node);
+        if (balance > 1 && BF(node.left) >= 0) //if balance factor is greater than 1 and left child balance factor is greater than or equal to 0
+            return rotateR(node); //rotate right
 
         // Left Right Case
-        if (balance > 1 && BF(node.left) < 0){
-            node.left = rotateL(node.left);
-            return rotateR(node);
+        if (balance > 1 && BF(node.left) < 0) //if balance factor is greater than 1 and left child balance factor is less than 0
+        {
+            node.left = rotateL(node.left); //rotate left
+            return rotateR(node); //rotate right
         }
 
         // Right Right Case
-        if (balance < -1 && BF(node.right) <= 0)
-            return rotateL(node);
+        if (balance < -1 && BF(node.right) <= 0) //if balance factor is less than -1 and right child balance factor is less than or equal to 0
+            return rotateL(node); //rotate left
         // Right Left Case
-        if (balance < -1 && BF(node.right) > 0){
-            node.right = rotateR(node.right);
-            return rotateL(node);
+        if (balance < -1 && BF(node.right) > 0) //if balance factor is less than -1 and right child balance factor is greater than 0
+        {
+            node.right = rotateR(node.right); //rotate right
+            return rotateL(node); //rotate left
         }
 
-        return node;
+        return node; //return node (new root)
     }
     public NodeAvl search(NodeAvl node, int data) //search for node in tree
     {
@@ -175,7 +177,7 @@ public class AvlTree
                 search(node.right, data); //recursive call
             }
         }
-        return node;
+        return node; //return node (null if not found)
     }
     public void preorder(NodeAvl node) //preorder traversal
     {

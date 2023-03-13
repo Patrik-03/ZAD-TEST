@@ -5,9 +5,10 @@ public class AvlTest
 {
     public static class AvlTreeChecker
     {
-        public AvlTree bal = new AvlTree();
+        public AvlTree bal = new AvlTree(); //create new avl tree object
 
-        public boolean isBalanced(NodeAvl node) {
+        public boolean isBalanced(NodeAvl node)  //check if tree is balanced
+        {
             if (node == null) //if node is null
             {
                 return true; //return true

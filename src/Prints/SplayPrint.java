@@ -6,7 +6,7 @@ public class SplayPrint
     public static void print()
     {
         System.out.print("Splay Tree preorder traversal: ");
-        SplayTree splay = new SplayTree();
+        SplayTree splay = new SplayTree(); //initialize splay tree
         splay.root = splay.insert(splay.root, 10);
         splay.root = splay.insert(splay.root, 52);
         splay.root = splay.insert(splay.root, 3);

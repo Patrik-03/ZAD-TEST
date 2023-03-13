@@ -5,10 +5,10 @@ public class NodeSplay
     public NodeSplay left;
     public NodeSplay right;
 
-    public NodeSplay(int data)
+    public NodeSplay(int data) //constructor for NodeSplay
     {
-        this.data = data;
-        left = null;
-        right = null;
+        this.data = data; //set data
+        left = null; //set left node to null
+        right = null; //set right node to null
     }
 }

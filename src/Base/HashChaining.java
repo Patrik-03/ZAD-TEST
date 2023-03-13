@@ -6,10 +6,10 @@ public class HashChaining
     public int value;
     public HashChaining next;
 
-    public HashChaining(String key, int value)
+    public HashChaining(String key, int value) // constructor for HashChaining
     {
-        this.key = key;
-        this.value = value;
-        this.next = null;
+        this.key = key; // set key
+        this.value = value; // set value
+        this.next = null; // set next node to null
     }
 }

@@ -3,32 +3,32 @@ import Base.NodeSplay;
 
 public class SplayTree
 {
-    public NodeSplay root;
-    NodeSplay rotateR(NodeSplay x)
+    public NodeSplay root; //root node
+    NodeSplay rotateR(NodeSplay x) //right rotation
     {
         NodeSplay z = x.left;
         x.left = z.right;
         z.right = x;
         return  z;
     }
-    NodeSplay rotateL(NodeSplay x)
+    NodeSplay rotateL(NodeSplay x) //left rotation
     {
         NodeSplay z = x.right;
         x.right = z.left;
         z.left = x;
         return z;
     }
-    NodeSplay splay(NodeSplay node, int data)
+    NodeSplay splay(NodeSplay node, int data) //splay node to root
     {
-        if(node == null || node.data == data)
+        if(node == null || node.data == data) //if node is null or node data is equal to data
         {
-            return node;
+            return node; //return node
         }
         if(node.data > data) //if data is less than node data go left
         {
-            if(node.left == null)
+            if(node.left == null) //if node is null
             {
-                return node;
+                return node; //return node
             }
             if (node.left.data > data) //if data is less than node data go left
             {
@@ -54,9 +54,9 @@ public class SplayTree
         }
         else //if data is greater than node data go right
         {
-            if(node.right == null)
+            if(node.right == null) //if node is null
             {
-                return node;
+                return node; //return node
             }
             if(node.right.data < data) //if data is less than node data go left
             {
@@ -81,7 +81,7 @@ public class SplayTree
             }
         }
     }
-    public NodeSplay insert(NodeSplay node, int data)
+    public NodeSplay insert(NodeSplay node, int data) //insert node
     {
         if (node == null) //if node is null
         {
@@ -99,9 +99,9 @@ public class SplayTree
         {
             return node; //return node
         }
-        return splay(node, data);
+        return splay(node, data); //splay the node to the root and return it
     }
-    public NodeSplay delete(NodeSplay node, int data)
+    public NodeSplay delete(NodeSplay node, int data) //delete node
     {
         NodeSplay temp; //create temp node to hold node data for deletion
         if(node == null) //if node is null
@@ -125,29 +125,29 @@ public class SplayTree
         }
         return node; //return node
     }
-    public NodeSplay search(NodeSplay node, int data)
+    public NodeSplay search(NodeSplay node, int data) //search for node
     {
-        if(node == null || node.data == data)
+        if(node == null || node.data == data) //if node is null or node data is equal to data
         {
-            return node;
+            return node; //return node
         }
-        if(node.data > data)
+        if(node.data > data) //if data is less than node data go left
         {
-            node.left = search(node.left, data);
+            node.left = search(node.left, data); //recursive call to search
         }
         else
         {
-            node.right = search(node.right, data);
+            node.right = search(node.right, data); //recursive call to search
         }
-        return splay(node, data);
+        return splay(node, data); //splay the node to the root and return it
     }
-    public void preorder(NodeSplay node)
+    public void preorder(NodeSplay node) //preorder traversal
     {
-        if(node != null)
+        if(node != null) //if node is not null
         {
-            System.out.print(node.data + ", ");
-            preorder(node.left);
-            preorder(node.right);
+            System.out.print(node.data + ", "); //print node data
+            preorder(node.left); //recursive call to preorder
+            preorder(node.right); //recursive call to preorder
         }
     }
 }

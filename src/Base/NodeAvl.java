@@ -6,9 +6,9 @@ public class NodeAvl
     public NodeAvl left;
     public NodeAvl right;
 
-    public NodeAvl(int data)
+    public NodeAvl(int data) //constructor for NodeAvl
     {
-        this.data = data;
-        this.height = 1;
+        this.data = data; //set data
+        this.height = 1; //set height to 1
     }
 }
