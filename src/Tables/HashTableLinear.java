@@ -1,23 +1,22 @@
 package Tables;
-import Base.HashTable;
-public class HashTableLinearProbing
+import Base.HashLinear;
+public class HashTableLinear
 {
-    public final HashTable table = new HashTable(10_000_000);
+    public HashLinear table = new HashLinear(10_000_000);
 
     public int hash(String key)
     {
-        int hash = 0;
-        for (int i = 0; i < key.length(); i++)
-        {
-            hash += key.charAt(i);
+        int hashValue = 0;
+        for (int i = 0; i < key.length(); i++) {
+            hashValue = (hashValue * 31 + key.charAt(i));
         }
-        return hash % table.capacity;
+        return hashValue % table.capacity;
     }
 
     public void put(String key, int value)
     {
         int index = hash(key); // get index of key in table
-        while (table.keys[index] != null) //
+        while (table.keys[index] != null) // if key is not null
         {
             if (table.keys[index].equals(key)) // key already exists in table
             {
@@ -58,10 +57,6 @@ public class HashTableLinearProbing
                 table.keys[index] = null;
                 table.values[index] = 0;
                 table.size--;
-                if (table.size <= table.capacity * 0.25)
-                {
-                    resize(table.capacity / 2);
-                }
                 return;
             }
             index = (index + 1) % table.capacity;

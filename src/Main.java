@@ -1,6 +1,7 @@
 import Prints.HashTableLinearPrint;
 import Prints.SplayPrint;
 import Prints.AvlPrint;
+import Prints.HashTableChainingPrint;
 public class Main
 {
     public static void main(String[] args)
@@ -8,6 +9,7 @@ public class Main
         //SplayPrint.print();
         //AvlPrint.print();
         //HashTableLinearPrint.print();
+        //HashTableChainingPrint.print();
         TEST.tester();
     }
 }

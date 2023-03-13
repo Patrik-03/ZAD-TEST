@@ -1,13 +1,12 @@
 package Base;
-
-public class HashTable
+public class HashLinear
 {
     public int size;
     public int capacity;
     public int[] values;
     public String[] keys;
 
-    public HashTable(int capacity)
+    public HashLinear(int capacity)
     {
         this.capacity = capacity;
         this.values = new int[capacity];

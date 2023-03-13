@@ -1,6 +1,8 @@
-import Tables.HashTableLinearProbing;
+import Tables.HashTableChaining;
+import Tables.HashTableLinear;
 import Tests.AvlTest;
 import Tests.SplayTest;
+import Tests.HashLinearTest;
 import Trees.AvlTree;
 import Trees.SplayTree;
 
@@ -14,15 +16,21 @@ public class TEST
         SplayTree splay = new SplayTree();
         SplayTest.SplayTreeChecker splayTreeChecker = new SplayTest.SplayTreeChecker();
         AvlTest.AvlTreeChecker avlTreeChecker = new AvlTest.AvlTreeChecker();
-        HashTableLinearProbing hash = new HashTableLinearProbing();
+        HashTableLinear hash = new HashTableLinear();
+        HashLinearTest.HashTableLinearChecker hashTableLinearChecker = new HashLinearTest.HashTableLinearChecker();
+        HashTableChaining hashChaining = new HashTableChaining(10_000_000);
 
         Runtime runtime;
         long startTime;
         long endTime;
         long memory;
-        int a = 0; //TEST NUMBER COUNTER
+        int a = 0;
         boolean test = true;
-        int num = 10_000_000; //number of numbers to be inserted
+
+        int num = 100_000; //number of numbers to be inserted
+
+        String alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"; //alphabet for random letters
+
         int[] data = new int[num]; //number of numbers to be inserted
         String[] key = new String[num]; //number of numbers to be inserted
         int[] value = new int[num]; //number of numbers to be inserted
@@ -35,16 +43,17 @@ public class TEST
         }
         for (int i = 0; i < num; i++)
         {
-            for (int j = 0; j < 2; j++)
+            for (int j = 0; j < 5; j++)
             {
-                key[i] += (char) (new Random().nextInt(26) + 'a'); //random letters for key
+                key[i] += alphabet.charAt((int) Math.floor((Math.random() * alphabet.length()))); //random letters for key
             }
         }
         System.out.println("\033[0;34m" + "TESTS" + "\033[0m");
         System.out.println("1. SPLAY");
         System.out.println("2. AVL");
-        System.out.println("3. HASH TABLE");
-        System.out.println("4. EXIT");
+        System.out.println("3. HASH LINEAR");
+        System.out.println("4. HASH CHAINING");
+        System.out.println("5. EXIT");
 
         while(test)
         {
@@ -293,6 +302,7 @@ public class TEST
                 case 3 ->
                 {
                     //Hashtable open addressing linear probing
+                    //insert
                     System.out.println("\033[0;34m" + "Hashtable Open Addressing Linear Probing (Insert)" + "\033[0m");
                     a = 0;
                     for (int i = 0; i < 1; i++) {
@@ -310,9 +320,198 @@ public class TEST
                         System.out.println("\033[0;36m" + "TEST " + a + "\033[0m");
                         System.out.println("TIME: " + (endTime - startTime) + " ms");
                         System.out.println("MEMORY: " + memory / 1024 + " KB");
+                        if (!hashTableLinearChecker.isCollision()) {
+                            System.out.println("TEST: " + "\033[0;31m" + "FAILED" + "\033[0m");
+                        } else {
+                            System.out.println("TEST: " + "\033[0;32m" + "PASSED" + "\033[0m");
+                        }
+                    }
+                    //insert and search
+                    System.out.println("\033[0;34m" + "Hashtable Open Addressing Linear Probing (Insert + Search)" + "\033[0m");
+                    a = 0;
+                    for (int i = 0; i < 1; i++) {
+                        runtime = Runtime.getRuntime();
+                        startTime = System.currentTimeMillis();
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hash.put(key[x], value[x]); //insert numbers
+                        }
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hash.get(key[x]);
+                        }
+                        a++;
+                        endTime = System.currentTimeMillis();
+                        runtime.gc();
+                        memory = runtime.totalMemory() - runtime.freeMemory();
+
+                        System.out.println("\033[0;36m" + "TEST " + a + "\033[0m");
+                        System.out.println("TIME: " + (endTime - startTime) + " ms");
+                        System.out.println("MEMORY: " + memory / 1024 + " KB");
+                        if (!hashTableLinearChecker.isCollision()) {
+                            System.out.println("TEST: " + "\033[0;31m" + "FAILED" + "\033[0m");
+                        } else {
+                            System.out.println("TEST: " + "\033[0;32m" + "PASSED" + "\033[0m");
+                        }
+                    }
+                    //insert and delete
+                    System.out.println("\033[0;34m" + "Hashtable Open Addressing Linear Probing (Insert + Delete)" + "\033[0m");
+                    a = 0;
+                    for (int i = 0; i < 1; i++) {
+                        runtime = Runtime.getRuntime();
+                        startTime = System.currentTimeMillis();
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hash.put(key[x], value[x]); //insert numbers
+                        }
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hash.remove(key[x]);
+                        }
+                        a++;
+                        endTime = System.currentTimeMillis();
+                        runtime.gc();
+                        memory = runtime.totalMemory() - runtime.freeMemory();
+
+                        System.out.println("\033[0;36m" + "TEST " + a + "\033[0m");
+                        System.out.println("TIME: " + (endTime - startTime) + " ms");
+                        System.out.println("MEMORY: " + memory / 1024 + " KB");
+                        if (!hashTableLinearChecker.isCollision()) {
+                            System.out.println("TEST: " + "\033[0;31m" + "FAILED" + "\033[0m");
+                        } else {
+                            System.out.println("TEST: " + "\033[0;32m" + "PASSED" + "\033[0m");
+                        }
+                    }
+                    //insert, search and delete
+                    System.out.println("\033[0;34m" + "Hashtable Open Addressing Linear Probing (Insert + Search + Delete)" + "\033[0m");
+                    a = 0;
+                    for (int i = 0; i < 1; i++) {
+                        runtime = Runtime.getRuntime();
+                        startTime = System.currentTimeMillis();
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hash.put(key[x], value[x]); //insert numbers
+                        }
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hash.get(key[x]);
+                        }
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hash.remove(key[x]);
+                        }
+                        a++;
+                        endTime = System.currentTimeMillis();
+                        runtime.gc();
+                        memory = runtime.totalMemory() - runtime.freeMemory();
+
+                        System.out.println("\033[0;36m" + "TEST " + a + "\033[0m");
+                        System.out.println("TIME: " + (endTime - startTime) + " ms");
+                        System.out.println("MEMORY: " + memory / 1024 + " KB");
+                        if (!hashTableLinearChecker.isCollision()) {
+                            System.out.println("TEST: " + "\033[0;31m" + "FAILED" + "\033[0m");
+                        } else {
+                            System.out.println("TEST: " + "\033[0;32m" + "PASSED" + "\033[0m");
+                        }
                     }
                 }
                 case 4 ->
+                {
+                    //Hashtable closed addressing chaining
+                    //insert
+                    System.out.println("\033[0;34m" + "Hashtable Closed Addressing Chaining (Insert)" + "\033[0m");
+                    a = 0;
+                    for (int i = 0; i < 1; i++) {
+                        runtime = Runtime.getRuntime();
+                        startTime = System.currentTimeMillis();
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hashChaining.put(key[x], value[x]); //insert numbers
+                        }
+                        a++;
+                        endTime = System.currentTimeMillis();
+                        runtime.gc();
+                        memory = runtime.totalMemory() - runtime.freeMemory();
+
+                        System.out.println("\033[0;36m" + "TEST " + a + "\033[0m");
+                        System.out.println("TIME: " + (endTime - startTime) + " ms");
+                        System.out.println("MEMORY: " + memory / 1024 + " KB");
+                    }
+                    //insert and search
+                    System.out.println("\033[0;34m" + "Hashtable Closed Addressing Chaining (Insert + Search)" + "\033[0m");
+                    a = 0;
+                    for (int i = 0; i < 1; i++) {
+                        runtime = Runtime.getRuntime();
+                        startTime = System.currentTimeMillis();
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hashChaining.put(key[x], value[x]); //insert numbers
+                        }
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hashChaining.get(key[x]);
+                        }
+                        a++;
+                        endTime = System.currentTimeMillis();
+                        runtime.gc();
+                        memory = runtime.totalMemory() - runtime.freeMemory();
+
+                        System.out.println("\033[0;36m" + "TEST " + a + "\033[0m");
+                        System.out.println("TIME: " + (endTime - startTime) + " ms");
+                        System.out.println("MEMORY: " + memory / 1024 + " KB");
+                    }
+                    //insert and delete
+                    System.out.println("\033[0;34m" + "Hashtable Closed Addressing Chaining (Insert + Delete)" + "\033[0m");
+                    a = 0;
+                    for (int i = 0; i < 1; i++) {
+                        runtime = Runtime.getRuntime();
+                        startTime = System.currentTimeMillis();
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hashChaining.put(key[x], value[x]); //insert numbers
+                        }
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hashChaining.remove(key[x]);
+                        }
+                        a++;
+                        endTime = System.currentTimeMillis();
+                        runtime.gc();
+                        memory = runtime.totalMemory() - runtime.freeMemory();
+
+                        System.out.println("\033[0;36m" + "TEST " + a + "\033[0m");
+                        System.out.println("TIME: " + (endTime - startTime) + " ms");
+                        System.out.println("MEMORY: " + memory / 1024 + " KB");
+                    }
+                    //insert, search and delete
+                    System.out.println("\033[0;34m" + "Hashtable Closed Addressing Chaining (Insert + Search + Delete)" + "\033[0m");
+                    a = 0;
+                    for (int i = 0; i < 1; i++) {
+                        runtime = Runtime.getRuntime();
+                        startTime = System.currentTimeMillis();
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hashChaining.put(key[x], value[x]); //insert numbers
+                        }
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hashChaining.get(key[x]);
+                        }
+                        for (int x = 0; x < num; x++) //number of numbers
+                        {
+                            hashChaining.remove(key[x]);
+                        }
+                        a++;
+                        endTime = System.currentTimeMillis();
+                        runtime.gc();
+                        memory = runtime.totalMemory() - runtime.freeMemory();
+
+                        System.out.println("\033[0;36m" + "TEST " + a + "\033[0m");
+                        System.out.println("TIME: " + (endTime - startTime) + " ms");
+                        System.out.println("MEMORY: " + memory / 1024 + " KB");
+                    }
+                }
+                case 5 ->
                 {
                     test = false;
                     System.out.println("\033[0;37mTest ended \033[0m");
